@@ -3,6 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { signUpSchema, type SignUpData } from './schemas';
 import { EmailTakenError, signUp } from './api';
 import { useNavigate } from 'react-router';
+import Button from '@/shared/ui/Button';
 
 export default function SignUpForm() {
   const navigate = useNavigate();
@@ -30,38 +31,46 @@ export default function SignUpForm() {
   };
 
   return (
-    <div style={{ maxWidth: 500, margin: '2rem auto' }}>
-      <h1>Sign Up</h1>
-      <form onSubmit={handleSubmit(onSubmit)} noValidate>
-        <div style={{ marginBottom: '1rem' }}>
-          <label>
-            Email:
-            <input
-              type="email"
-              autoComplete="email"
-              placeholder="you@example.com"
-              {...register('email')}
-            />
-          </label>
-          {errors.email && <p role="alert">{errors.email.message}</p>}
-        </div>
-        <div style={{ marginBottom: '1rem' }}>
-          <label>
-            Password:
-            <input
-              type="password"
-              autoComplete="new-password"
-              placeholder="********"
-              {...register('password')}
-            />
-          </label>
-          {errors.password && <p role="alert">{errors.password.message}</p>}
-        </div>
-        {errors.root && <p role="alert">{errors.root.message}</p>}
-        <button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? 'Creating...' : 'Create account'}
-        </button>
-      </form>
-    </div>
+    <form className="flex flex-col gap-4 items-center" onSubmit={handleSubmit(onSubmit)} noValidate>
+      <label className="flex gap-2">
+        Email:
+        <input
+          type="email"
+          autoComplete="email"
+          placeholder="you@example.com"
+          {...register('email')}
+        />
+      </label>
+      {errors.email && (
+        <p className="text-red-500" role="alert">
+          {errors.email.message}
+        </p>
+      )}
+
+      <label className="flex gap-2">
+        Password:
+        <input
+          type="password"
+          autoComplete="new-password"
+          placeholder="********"
+          {...register('password')}
+        />
+      </label>
+      {errors.password && (
+        <p className="text-red-500" role="alert">
+          {errors.password.message}
+        </p>
+      )}
+
+      {errors.root && (
+        <p className="text-red-500" role="alert">
+          {errors.root.message}
+        </p>
+      )}
+
+      <Button type="submit" disabled={isSubmitting}>
+        {isSubmitting ? 'Creating...' : 'Create account'}
+      </Button>
+    </form>
   );
 }

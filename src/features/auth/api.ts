@@ -1,19 +1,28 @@
-import type { SignUpData } from './schemas';
+import type { LogInData, SignUpData } from './schemas';
+
 export class EmailTakenError extends Error {}
+export class InvalidCredentialsError extends Error {}
+
+const users: SignUpData[] = [];
+
+const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export async function signUp(data: SignUpData): Promise<void> {
-  // const response = await fetch('api/signup', {
-  //   method: 'POST',
-  //   headers: { 'Content-Type': 'application/json' },
-  //   body: JSON.stringify(data),
-  // });
+  await delay(1000);
 
-  // if (!response.ok) {
-  //   throw new Error('Failed signup');
-  // }
-  await new Promise((resolve) => setTimeout(resolve, 1000));
-
-  if (data.email === 'dan.gor220@yandex.ru') {
+  if (users.some((user) => user.email === data.email)) {
     throw new EmailTakenError('This email already exist');
+  }
+
+  users.push(data);
+}
+
+export async function logIn(data: LogInData): Promise<void> {
+  await delay(1000);
+
+  const user = users.find((u) => u.email === data.email);
+
+  if (user?.password !== data.password) {
+    throw new InvalidCredentialsError('Invalid email or password');
   }
 }
