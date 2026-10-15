@@ -1,23 +1,32 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
-
-const signUpSchema = z.object({
-  email: z.email('Введите корректный email'),
-  password: z.string().min(8, 'Минимум 8 символов'),
-});
-
-type SignUpData = z.infer<typeof signUpSchema>;
+import { signUpSchema, type SignUpData } from './schemas';
+import { EmailTakenError, signUp } from './api';
+import { useNavigate } from 'react-router';
 
 export default function SignUpForm() {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors, isSubmitting },
   } = useForm<SignUpData>({ resolver: zodResolver(signUpSchema) });
 
-  const onSubmit = (data: SignUpData) => {
-    alert(data.email + ' ' + data.password);
+  const onSubmit = async (data: SignUpData) => {
+    try {
+      await signUp(data);
+      await navigate('/login');
+    } catch (error) {
+      if (error instanceof EmailTakenError) {
+        setError('email', { message: error.message });
+      } else {
+        setError('root', {
+          message: error instanceof Error ? error.message : 'Something wrong',
+        });
+      }
+    }
   };
 
   return (
@@ -48,8 +57,9 @@ export default function SignUpForm() {
           </label>
           {errors.password && <p role="alert">{errors.password.message}</p>}
         </div>
+        {errors.root && <p role="alert">{errors.root.message}</p>}
         <button type="submit" disabled={isSubmitting}>
-          Create account
+          {isSubmitting ? 'Creating...' : 'Create account'}
         </button>
       </form>
     </div>
