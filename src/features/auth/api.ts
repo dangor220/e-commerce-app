@@ -1,4 +1,5 @@
 import type { LogInData, SignUpData } from './schemas';
+import type { User } from './types';
 
 export class EmailTakenError extends Error {}
 export class InvalidCredentialsError extends Error {}
@@ -17,7 +18,7 @@ export async function signUp(data: SignUpData): Promise<void> {
   users.push(data);
 }
 
-export async function logIn(data: LogInData): Promise<void> {
+export async function logIn(data: LogInData): Promise<User> {
   await delay(1000);
 
   const user = users.find((u) => u.email === data.email);
@@ -25,4 +26,6 @@ export async function logIn(data: LogInData): Promise<void> {
   if (user?.password !== data.password) {
     throw new InvalidCredentialsError('Invalid email or password');
   }
+
+  return { email: user.email, firstName: user.firstName, lastName: user.lastName };
 }

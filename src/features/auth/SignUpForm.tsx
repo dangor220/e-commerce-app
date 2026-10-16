@@ -33,6 +33,14 @@ export default function SignUpForm() {
   return (
     <form className="flex flex-col gap-4 items-center" onSubmit={handleSubmit(onSubmit)} noValidate>
       <label className="flex gap-2">
+        First name:
+        <input type="text" placeholder="John" {...register('firstName')} />
+      </label>
+      <label className="flex gap-2">
+        Last name:
+        <input type="text" placeholder="Smith" {...register('lastName')} />
+      </label>
+      <label className="flex gap-2">
         Email:
         <input
           type="email"

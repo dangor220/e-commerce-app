@@ -3,6 +3,8 @@ import z from 'zod';
 export const signUpSchema = z.object({
   email: z.email('Введите корректный email'),
   password: z.string().min(8, 'Минимум 8 символов'),
+  firstName: z.string(),
+  lastName: z.string(),
 });
 
 export const logInSchema = z.object({

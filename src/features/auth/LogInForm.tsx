@@ -2,8 +2,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { logInSchema, type LogInData } from './schemas';
 import { useNavigate } from 'react-router';
-import { InvalidCredentialsError, logIn } from './api';
+import { InvalidCredentialsError } from './api';
 import Button from '@/shared/ui/Button';
+import { useAuth } from './useAuth';
 
 export default function LogInForm() {
   const navigate = useNavigate();
@@ -13,6 +14,7 @@ export default function LogInForm() {
     setError,
     formState: { errors, isSubmitting },
   } = useForm<LogInData>({ resolver: zodResolver(logInSchema) });
+  const { logIn } = useAuth();
 
   const onSubmit = async (data: LogInData) => {
     try {
