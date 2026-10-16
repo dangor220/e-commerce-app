@@ -6,6 +6,7 @@ export const signUpSchema = z.object({
   firstName: z.string(),
   lastName: z.string(),
 });
+export const userMetadataSchema = signUpSchema.pick({ firstName: true, lastName: true });
 
 export const logInSchema = z.object({
   email: z.email('Введите корректный email'),
