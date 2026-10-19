@@ -8,8 +8,6 @@ export default function UserMenu() {
   const { user, logOut, isLoading } = useAuth();
   const { pathname } = useLocation();
 
-  console.log(pathname);
-
   if (isLoading) return null;
 
   if (!user) {

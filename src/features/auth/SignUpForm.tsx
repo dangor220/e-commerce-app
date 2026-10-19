@@ -36,10 +36,20 @@ export default function SignUpForm() {
         First name:
         <input type="text" placeholder="John" {...register('firstName')} />
       </label>
+      {errors.firstName && (
+        <p className="text-red-500" role="alert">
+          {errors.firstName.message}
+        </p>
+      )}
       <label className="flex gap-2">
         Last name:
         <input type="text" placeholder="Smith" {...register('lastName')} />
       </label>
+      {errors.lastName && (
+        <p className="text-red-500" role="alert">
+          {errors.lastName.message}
+        </p>
+      )}
       <label className="flex gap-2">
         Email:
         <input
