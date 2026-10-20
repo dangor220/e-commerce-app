@@ -31,28 +31,29 @@ export default function SignUpForm() {
   };
 
   return (
-    <form className="flex flex-col gap-4 items-center" onSubmit={handleSubmit(onSubmit)} noValidate>
-      <label className="flex gap-2">
+    <form className="flex flex-col gap-4 items-start" onSubmit={handleSubmit(onSubmit)} noValidate>
+      <label className="flex gap-2 items-center">
         First name:
-        <input type="text" placeholder="John" {...register('firstName')} />
+        <input className="px-1 py-1" type="text" placeholder="John" {...register('firstName')} />
       </label>
       {errors.firstName && (
-        <p className="text-red-500" role="alert">
+        <p className="italic text-red-500" role="alert">
           {errors.firstName.message}
         </p>
       )}
-      <label className="flex gap-2">
+      <label className="flex gap-2 items-center">
         Last name:
-        <input type="text" placeholder="Smith" {...register('lastName')} />
+        <input className="px-1 py-1" type="text" placeholder="Smith" {...register('lastName')} />
       </label>
       {errors.lastName && (
-        <p className="text-red-500" role="alert">
+        <p className="italic text-red-500" role="alert">
           {errors.lastName.message}
         </p>
       )}
-      <label className="flex gap-2">
+      <label className="flex gap-2 items-center">
         Email:
         <input
+          className="px-1 py-1"
           type="email"
           autoComplete="email"
           placeholder="you@example.com"
@@ -60,14 +61,15 @@ export default function SignUpForm() {
         />
       </label>
       {errors.email && (
-        <p className="text-red-500" role="alert">
+        <p className="italic text-red-500" role="alert">
           {errors.email.message}
         </p>
       )}
 
-      <label className="flex gap-2">
+      <label className="flex gap-2 items-center">
         Password:
         <input
+          className="px-1 py-1"
           type="password"
           autoComplete="new-password"
           placeholder="********"
@@ -75,18 +77,18 @@ export default function SignUpForm() {
         />
       </label>
       {errors.password && (
-        <p className="text-red-500" role="alert">
+        <p className="italic text-red-500" role="alert">
           {errors.password.message}
         </p>
       )}
 
       {errors.root && (
-        <p className="text-red-500" role="alert">
+        <p className="italic text-red-500" role="alert">
           {errors.root.message}
         </p>
       )}
 
-      <Button type="submit" disabled={isSubmitting}>
+      <Button className="self-center" type="submit" disabled={isSubmitting}>
         {isSubmitting ? 'Creating...' : 'Create account'}
       </Button>
     </form>

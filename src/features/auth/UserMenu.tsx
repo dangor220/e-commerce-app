@@ -1,21 +1,17 @@
-import { NavLink, useLocation } from 'react-router';
+import { NavLink } from 'react-router';
 import { useAuth } from './useAuth';
 import Button from '@/shared/ui/Button';
-
-const AUTH_PATHS = ['/login', '/signup'];
+import { buttonStyles } from '@/shared/ui/button-styles';
 
 export default function UserMenu() {
   const { user, logOut, isLoading } = useAuth();
-  const { pathname } = useLocation();
 
   if (isLoading) return null;
 
   if (!user) {
-    if (AUTH_PATHS.includes(pathname)) return null;
-
     return (
-      <NavLink to="/login">
-        <Button>Log In</Button>
+      <NavLink to="/login" className={buttonStyles()}>
+        Log In
       </NavLink>
     );
   }

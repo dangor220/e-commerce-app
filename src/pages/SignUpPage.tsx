@@ -3,12 +3,15 @@ import { Link } from 'react-router';
 
 export default function SignUpPage() {
   return (
-    <>
-      <h1>Sign Up</h1>
+    <div className="mx-auto items-center flex flex-col gap-2">
+      <h1 className="text-2xl">Sign Up</h1>
       <SignUpForm />
-      <p>
-        Already have an account? <Link to="/login">LogIn</Link>
+      <p className="italic">
+        Already have an account?{' '}
+        <Link className="text-indigo-600" to="/login">
+          LogIn
+        </Link>
       </p>
-    </>
+    </div>
   );
 }

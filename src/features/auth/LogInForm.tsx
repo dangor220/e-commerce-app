@@ -31,10 +31,11 @@ export default function LogInForm() {
   };
 
   return (
-    <form className="flex flex-col gap-4 items-center" onSubmit={handleSubmit(onSubmit)} noValidate>
-      <label className="flex gap-2">
+    <form className="flex flex-col gap-4 items-start" onSubmit={handleSubmit(onSubmit)} noValidate>
+      <label className="flex gap-2 items-center">
         <span>Email:</span>
         <input
+          className="px-1 py-1"
           type="email"
           autoComplete="email"
           placeholder="you@example.com"
@@ -42,13 +43,14 @@ export default function LogInForm() {
         />
       </label>
       {errors.email && (
-        <p className="text-red-500" role="alert">
+        <p className="italic text-red-500" role="alert">
           {errors.email.message}
         </p>
       )}
-      <label className="flex gap-2">
+      <label className="flex gap-2 items-center">
         <span>Password:</span>
         <input
+          className="px-1 py-1"
           type="password"
           autoComplete="new-password"
           placeholder="********"
@@ -56,17 +58,17 @@ export default function LogInForm() {
         />
       </label>
       {errors.password && (
-        <p className="text-red-500" role="alert">
+        <p className="italic text-red-500" role="alert">
           {errors.password.message}
         </p>
       )}
       {errors.root && (
-        <p className="text-red-500" role="alert">
+        <p className="italic text-red-500" role="alert">
           {errors.root.message}
         </p>
       )}
 
-      <Button type="submit" disabled={isSubmitting}>
+      <Button className="self-center" type="submit" disabled={isSubmitting}>
         {isSubmitting ? 'Logging in...' : 'Log in'}
       </Button>
     </form>
