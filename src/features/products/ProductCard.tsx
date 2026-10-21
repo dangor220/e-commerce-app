@@ -13,6 +13,8 @@ const priceFormatter = new Intl.NumberFormat('en-US', {
 export default function ProductCard({ product }: ProductCardProps) {
   const { name, price, description, image } = product;
 
+  const handleAddProduct = () => {};
+
   return (
     <article>
       {image ? (
@@ -30,7 +32,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         {description && <p className="line-clamp-2 text-sm text-gray-600">{description}</p>}
         <div className="flex justify-between items-center">
           <p className="mt-auto text-lg font-semibold">{priceFormatter.format(price)}</p>
-          <Button>Add to cart</Button>
+          <Button onClick={handleAddProduct}>Add to cart</Button>
         </div>
       </div>
     </article>
