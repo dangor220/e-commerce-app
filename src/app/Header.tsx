@@ -13,7 +13,7 @@ const navLinkClass = ({ isActive }: { isActive: boolean }) =>
 export default function Header() {
   return (
     <header className="sticky top-0 z-10 border-gray-200 bg-white/80 backdrop-blur">
-      <div className="mx-auto grid h-16 max-w-6xl grid-cols-[1fr_auto_1fr] items-center gap-4 px-5">
+      <div className="mx-auto grid h-16 max-w-6xl grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-4 px-5">
         <NavLink className="justify-self-start" to="/" aria-label="Cartly, at home">
           <Logo />
         </NavLink>
