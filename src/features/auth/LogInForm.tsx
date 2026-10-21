@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { logInSchema, type LogInData } from './schemas';
 import { useNavigate } from 'react-router';
 import { InvalidCredentialsError } from './api';
-import Button from '@/shared/ui/Button';
+import Button from '@/shared/ui/Button/Button';
 import { useAuth } from './useAuth';
 
 export default function LogInForm() {
@@ -43,7 +43,7 @@ export default function LogInForm() {
         />
       </label>
       {errors.email && (
-        <p className="italic text-red-500" role="alert">
+        <p className="italic text-red-500 text-sm" role="alert">
           {errors.email.message}
         </p>
       )}
@@ -58,12 +58,12 @@ export default function LogInForm() {
         />
       </label>
       {errors.password && (
-        <p className="italic text-red-500" role="alert">
+        <p className="italic text-red-500 text-sm" role="alert">
           {errors.password.message}
         </p>
       )}
       {errors.root && (
-        <p className="italic text-red-500" role="alert">
+        <p className="italic text-red-500 text-sm" role="alert">
           {errors.root.message}
         </p>
       )}

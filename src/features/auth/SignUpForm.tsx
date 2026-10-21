@@ -3,7 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { signUpSchema, type SignUpData } from './schemas';
 import { EmailTakenError, signUp } from './api';
 import { useNavigate } from 'react-router';
-import Button from '@/shared/ui/Button';
+import Button from '@/shared/ui/Button/Button';
 
 export default function SignUpForm() {
   const navigate = useNavigate();
@@ -37,7 +37,7 @@ export default function SignUpForm() {
         <input className="px-1 py-1" type="text" placeholder="John" {...register('firstName')} />
       </label>
       {errors.firstName && (
-        <p className="italic text-red-500" role="alert">
+        <p className="italic text-red-500 text-sm" role="alert">
           {errors.firstName.message}
         </p>
       )}
@@ -46,7 +46,7 @@ export default function SignUpForm() {
         <input className="px-1 py-1" type="text" placeholder="Smith" {...register('lastName')} />
       </label>
       {errors.lastName && (
-        <p className="italic text-red-500" role="alert">
+        <p className="italic text-red-500 text-sm" role="alert">
           {errors.lastName.message}
         </p>
       )}
@@ -61,7 +61,7 @@ export default function SignUpForm() {
         />
       </label>
       {errors.email && (
-        <p className="italic text-red-500" role="alert">
+        <p className="italic text-red-500 text-sm" role="alert">
           {errors.email.message}
         </p>
       )}
@@ -77,13 +77,13 @@ export default function SignUpForm() {
         />
       </label>
       {errors.password && (
-        <p className="italic text-red-500" role="alert">
+        <p className="italic text-red-500 text-sm" role="alert">
           {errors.password.message}
         </p>
       )}
 
       {errors.root && (
-        <p className="italic text-red-500" role="alert">
+        <p className="italic text-red-500 text-sm" role="alert">
           {errors.root.message}
         </p>
       )}

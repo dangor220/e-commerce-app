@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router';
 import { useAuth } from './useAuth';
-import Button from '@/shared/ui/Button';
-import { buttonStyles } from '@/shared/ui/button-styles';
+import Button from '@/shared/ui/Button/Button';
+import { buttonStyles } from '@/shared/ui/Button/button-styles';
 
 export default function UserMenu() {
   const { user, logOut, isLoading } = useAuth();
