@@ -13,7 +13,7 @@ export default function ProductList() {
 
     async function load() {
       try {
-        const data = await getProducts();
+        const data = await getProducts(6);
         if (!ignore) setProducts(data);
       } catch {
         if (!ignore) setError('Failed to load products');
