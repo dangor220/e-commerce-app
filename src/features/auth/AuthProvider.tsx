@@ -7,6 +7,7 @@ import type { LogInData } from './schemas';
 export default function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [emailVerification, setEmailVerification] = useState(false);
 
   useEffect(() => {
     return subscribeToAuth((nextUser) => {
@@ -23,5 +24,21 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
     await logOutRequest();
   };
 
-  return <AuthContext value={{ user, isLoading, logIn, logOut }}>{children}</AuthContext>;
+  const showVerifyEmail = () => setEmailVerification(true);
+  const hideVerifyEmail = () => setEmailVerification(false);
+
+  return (
+    <AuthContext
+      value={{
+        user,
+        isLoading,
+        logIn,
+        logOut,
+        emailVerification,
+        showVerifyEmail,
+        hideVerifyEmail,
+      }}>
+      {children}
+    </AuthContext>
+  );
 }
