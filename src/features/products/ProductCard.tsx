@@ -20,13 +20,13 @@ export default function ProductCard({ product, onPreview }: ProductCardProps) {
     <article>
       {image ? (
         <img
-          className="aspect-[3/2] w-full object-cover rounded-sm"
+          className="aspect-3/2 w-full object-cover rounded-sm"
           src={image}
           alt={name}
           loading="lazy"
         />
       ) : (
-        <div className="aspect-[3/2] w-full bg-gray-100" />
+        <div className="aspect-3/2 w-full bg-gray-100" />
       )}
       <div className="flex flex-1 flex-col gap-2 p-4">
         <h3 className="font-medium text-gray-900">{name}</h3>
