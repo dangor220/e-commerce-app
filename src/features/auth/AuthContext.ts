@@ -7,6 +7,9 @@ export interface AuthContextValue {
   logIn: (data: LogInData) => Promise<void>;
   logOut: () => void;
   isLoading: boolean;
+  emailVerification: boolean;
+  showVerifyEmail: () => void;
+  hideVerifyEmail: () => void;
 }
 
 export const AuthContext = createContext<AuthContextValue | null>(null);

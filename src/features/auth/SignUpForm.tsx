@@ -4,9 +4,11 @@ import { signUpSchema, type SignUpData } from './schemas';
 import { EmailTakenError, signUp } from './api';
 import { useNavigate } from 'react-router';
 import Button from '@/shared/ui/Button/Button';
+import { useAuth } from './useAuth';
 
 export default function SignUpForm() {
   const navigate = useNavigate();
+  const { showVerifyEmail } = useAuth();
 
   const {
     register,
@@ -18,6 +20,7 @@ export default function SignUpForm() {
   const onSubmit = async (data: SignUpData) => {
     try {
       await signUp(data);
+      showVerifyEmail();
       await navigate('/login');
     } catch (error) {
       if (error instanceof EmailTakenError) {
