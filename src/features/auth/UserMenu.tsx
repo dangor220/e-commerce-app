@@ -17,7 +17,7 @@ export default function UserMenu() {
   }
 
   return (
-    <div className="flex gap-2 items-center">
+    <div className="flex gap-3 items-center">
       <div className="flex flex-col items-start">
         <span>
           {user.firstName} {user.lastName}

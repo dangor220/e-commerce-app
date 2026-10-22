@@ -14,7 +14,7 @@ function getVariantStyles(variant: Variant) {
     case 'primary':
       return 'bg-indigo-600 hover:bg-indigo-500';
     case 'secondary':
-      return 'bg-zinc-700 hover:bg-zinc-600 text-zinc-400';
+      return 'white text-black hover:bg-gray-500 hover:text-white';
     case 'ghost-destructive':
       return 'hover:bg-red-800 text-red-800 hover:text-red-200';
     default:
