@@ -1,9 +1,9 @@
 import Button from '@/shared/ui/Button/Button';
 import type { Product } from './schemas';
-import { useState } from 'react';
 
 type ProductCardProps = {
   product: Product;
+  onPreview: (product: Product) => void;
 };
 
 const priceFormatter = new Intl.NumberFormat('en-US', {
@@ -11,9 +11,8 @@ const priceFormatter = new Intl.NumberFormat('en-US', {
   currency: 'USD',
 });
 
-export default function ProductCard({ product }: ProductCardProps) {
+export default function ProductCard({ product, onPreview }: ProductCardProps) {
   const { name, price, description, image } = product;
-  const { isPreview, setIsPreview } = useState(false);
 
   const handleAddProduct = () => {};
 
@@ -35,7 +34,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         <div className="flex justify-between items-center">
           <p className="mt-auto text-lg font-semibold">{priceFormatter.format(price)}</p>
           <div className="flex gap-1">
-            <Button onClick={() => setIsPreview(!isPreview)} variant="secondary">
+            <Button onClick={() => onPreview(product)} variant="secondary">
               Learn more
             </Button>
             <Button onClick={handleAddProduct}>Add to cart</Button>

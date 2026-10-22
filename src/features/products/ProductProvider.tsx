@@ -7,7 +7,6 @@ export default function ProductProvider({ children }: { children: ReactNode }) {
   const [products, setProducts] = useState<Product[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [isPreview, setIsPreview] = useState(false);
 
   useEffect(() => {
     let ignore = false;
@@ -29,13 +28,5 @@ export default function ProductProvider({ children }: { children: ReactNode }) {
     };
   }, []);
 
-  const showPreview = () => {
-    setIsPreview((prev) => !prev);
-  };
-
-  return (
-    <ProductContext value={{ products, isLoading, isPreview, error, showPreview }}>
-      {children}
-    </ProductContext>
-  );
+  return <ProductContext value={{ products, isLoading, error }}>{children}</ProductContext>;
 }
