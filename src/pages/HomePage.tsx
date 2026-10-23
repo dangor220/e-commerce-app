@@ -12,7 +12,7 @@ export default function HomePage() {
         <h2 className="mb-12 text-2xl font-semibold text-center" id="featured-heading">
           Featured products
         </h2>
-        <ProductList />
+        <ProductList limit={6} />
       </section>
     </div>
   );

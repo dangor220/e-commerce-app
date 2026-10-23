@@ -4,6 +4,7 @@ import type { Product } from './schemas';
 import { getProducts } from './api';
 
 export default function ProductProvider({ children }: { children: ReactNode }) {
+  const [limit, setLimit] = useState<number | undefined>();
   const [products, setProducts] = useState<Product[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -13,7 +14,7 @@ export default function ProductProvider({ children }: { children: ReactNode }) {
 
     async function load() {
       try {
-        const data = await getProducts(6);
+        const data = await getProducts(limit);
         if (!ignore) setProducts(data);
       } catch {
         if (!ignore) setError('Failed to load products');
@@ -26,7 +27,15 @@ export default function ProductProvider({ children }: { children: ReactNode }) {
     return () => {
       ignore = true;
     };
-  }, []);
+  }, [limit]);
 
-  return <ProductContext value={{ products, isLoading, error }}>{children}</ProductContext>;
+  const setProductLimit = (value: number | undefined) => {
+    setLimit(value);
+  };
+
+  return (
+    <ProductContext value={{ products, isLoading, error, setProductLimit }}>
+      {children}
+    </ProductContext>
+  );
 }

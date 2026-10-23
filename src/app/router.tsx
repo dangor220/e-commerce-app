@@ -6,6 +6,8 @@ import SignUpPage from '@/pages/SignUpPage';
 import { createBrowserRouter } from 'react-router';
 import RootLayout from './RootLayout';
 import CartPage from '@/pages/CartPage';
+import ProductDetailPage from '@/pages/ProductDetailPage';
+import ProductsPage from '@/pages/ProductsPage';
 
 export const router = createBrowserRouter([
   {
@@ -23,6 +25,14 @@ export const router = createBrowserRouter([
       {
         path: 'signup',
         Component: SignUpPage,
+      },
+      {
+        path: 'products',
+        Component: ProductsPage,
+      },
+      {
+        path: 'products/:id',
+        Component: ProductDetailPage,
       },
       {
         path: '*',
