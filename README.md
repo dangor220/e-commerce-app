@@ -1,7 +1,9 @@
 <a id="readme-top"></a>
 
-<!-- PROJECT LOGO -->
+[![READMEENG](https://img.shields.io/badge/readme_en-white?style=for-the-badge&logo=en)](https://github.com/dangor220/cartly/blob/main/README.en.md)
+<br />
 
+<!-- PROJECT LOGO -->
 <div align="center">
 
   <a href="https://github.com/dangor220/cartly/tree/main/src">
