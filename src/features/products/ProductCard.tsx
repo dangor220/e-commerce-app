@@ -1,5 +1,7 @@
 import Button from '@/shared/ui/Button/Button';
 import type { Product } from './schemas';
+import { Link } from 'react-router';
+import { buttonStyles } from '@/shared/ui/Button/button-styles';
 
 type ProductCardProps = {
   product: Product;
@@ -20,13 +22,17 @@ export default function ProductCard({ product, onPreview }: ProductCardProps) {
     <article>
       {image ? (
         <img
-          className="aspect-3/2 w-full object-cover rounded-sm"
+          onClick={() => onPreview(product)}
+          className="aspect-3/2 w-full object-cover rounded-sm cursor-pointer"
           src={image}
           alt={name}
           loading="lazy"
         />
       ) : (
-        <div className="aspect-3/2 w-full bg-gray-100" />
+        <div
+          onClick={() => onPreview(product)}
+          className="aspect-3/2 w-full bg-gray-100 cursor-pointer"
+        />
       )}
       <div className="flex flex-1 flex-col gap-2 p-4">
         <h3 className="font-medium text-gray-900">{name}</h3>
@@ -34,9 +40,9 @@ export default function ProductCard({ product, onPreview }: ProductCardProps) {
         <div className="flex justify-between items-center">
           <p className="mt-auto text-lg font-semibold">{priceFormatter.format(price)}</p>
           <div className="flex gap-1">
-            <Button onClick={() => onPreview(product)} variant="secondary">
+            <Link to={`/products/${product.id}`} className={buttonStyles('secondary')}>
               Learn more
-            </Button>
+            </Link>
             <Button onClick={handleAddProduct}>Add to cart</Button>
           </div>
         </div>

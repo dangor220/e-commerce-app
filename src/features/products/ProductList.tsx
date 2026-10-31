@@ -1,13 +1,21 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ProductCard from './ProductCard';
 import useProducts from './useProducts';
 import type { Product } from './schemas';
 import Modal from '@/shared/ui/Modal';
 import ProductModal from './ProductModal';
 
-export default function ProductList() {
-  const { isLoading, error, products } = useProducts();
+type ProductListType = {
+  limit?: number | undefined;
+};
+
+export default function ProductList({ limit }: ProductListType) {
+  const { isLoading, error, products, setProductLimit } = useProducts();
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+
+  useEffect(() => {
+    setProductLimit(limit);
+  }, [limit, setProductLimit]);
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p role="alert">{error}</p>;
