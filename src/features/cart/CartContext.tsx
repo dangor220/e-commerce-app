@@ -7,6 +7,8 @@ export interface CartContextValue {
   isLoading: boolean;
   error: string | null;
   addItem: (productId: number) => Promise<void>;
+  setQuantity: (productId: number, quantity: number) => Promise<void>;
+  removeItem: (productId: number) => Promise<void>;
 }
 
 export const CartContext = createContext<CartContextValue | null>(null);

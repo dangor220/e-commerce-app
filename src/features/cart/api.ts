@@ -44,3 +44,18 @@ export async function mergeIntoServerCart(lines: CartLine[]): Promise<void> {
 
   if (error) throw new Error(error.message);
 }
+
+export async function setServerQuantity(productId: number, quantity: number): Promise<void> {
+  const { error } = await supabase
+    .from('cart_items')
+    .update({ quantity })
+    .eq('product_id', productId);
+
+  if (error) throw new Error(error.message);
+}
+
+export async function removeFromServerCart(productId: number): Promise<void> {
+  const { error } = await supabase.from('cart_items').delete().eq('product_id', productId);
+
+  if (error) throw new Error(error.message);
+}

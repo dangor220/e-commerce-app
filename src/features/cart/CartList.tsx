@@ -5,6 +5,8 @@ import { getProductsByIds } from '@/features/products/api';
 import type { Product } from '@/features/products/schemas';
 import { buttonStyles } from '@/shared/ui/Button/button-styles';
 import useCart from './useCart';
+import Button from '@/shared/ui/Button/Button';
+import QuantityControls from './QuantityControls';
 
 const priceFormatter = new Intl.NumberFormat('en-US', {
   style: 'currency',
@@ -52,7 +54,7 @@ export default function CartList() {
     return (
       <div className="flex flex-col items-start gap-4">
         <p className="text-gray-600">Your cart is empty.</p>
-        <Link to="/" className={buttonStyles()}>
+        <Link to="/products" className={buttonStyles()}>
           Browse products
         </Link>
       </div>
@@ -95,6 +97,8 @@ export default function CartList() {
             </div>
 
             <p className="font-semibold">{priceFormatter.format(product.price * quantity)}</p>
+
+            <QuantityControls productId={product.id} quantity={quantity} />
           </li>
         ))}
       </ul>
@@ -107,9 +111,9 @@ export default function CartList() {
         </div>
 
         {user ? (
-          <button type="button" className={`${buttonStyles()} w-full`}>
+          <Button type="button" className={`${buttonStyles()} w-full`}>
             Checkout
-          </button>
+          </Button>
         ) : (
           <Link to="/login" className={`${buttonStyles()} block text-center`}>
             Log in to checkout

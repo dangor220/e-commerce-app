@@ -1,6 +1,12 @@
 import { useEffect, useState, type ReactNode } from 'react';
 import { useAuth } from '@/features/auth/useAuth';
-import { addToServerCart, getServerCart, mergeIntoServerCart } from './api';
+import {
+  addToServerCart,
+  getServerCart,
+  mergeIntoServerCart,
+  removeFromServerCart,
+  setServerQuantity,
+} from './api';
 import { CartContext } from './CartContext';
 import { clearGuestCart, loadGuestCart, saveGuestCart } from './guestStorage';
 import type { CartLine } from './schemas';
@@ -12,6 +18,11 @@ function withOneMore(lines: CartLine[], productId: number): CartLine[] {
   return exists
     ? lines.map((l) => (l.productId === productId ? { ...l, quantity: l.quantity + 1 } : l))
     : [...lines, { productId, quantity: 1 }];
+}
+
+function withQuantity(lines: CartLine[], productId: number, quantity: number): CartLine[] {
+  if (quantity <= 0) return lines.filter((l) => l.productId !== productId);
+  return lines.map((l) => (l.productId === productId ? { ...l, quantity } : l));
 }
 
 export default function CartProvider({ children }: { children: ReactNode }) {
@@ -68,5 +79,23 @@ export default function CartProvider({ children }: { children: ReactNode }) {
     setServerCart({ owner: email, lines: await getServerCart() });
   };
 
-  return <CartContext value={{ lines, count, isLoading, error, addItem }}>{children}</CartContext>;
+  const setQuantity = async (productId: number, quantity: number) => {
+    if (!email) {
+      const next = withQuantity(guestLines, productId, quantity);
+      setGuestLines(next);
+      saveGuestCart(next);
+      return;
+    }
+    if (quantity <= 0) await removeFromServerCart(productId);
+    else await setServerQuantity(productId, quantity);
+
+    setServerCart({ owner: email, lines: await getServerCart() });
+  };
+  const removeItem = (productId: number) => setQuantity(productId, 0);
+
+  return (
+    <CartContext value={{ lines, count, isLoading, error, addItem, setQuantity, removeItem }}>
+      {children}
+    </CartContext>
+  );
 }
