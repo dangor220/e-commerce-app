@@ -1,5 +1,5 @@
-import Button from '@/shared/ui/Button/Button';
 import type { Product } from './schemas';
+import AddToCartButton from '../cart/AddToCartButton';
 
 export default function ProductModal({ product }: { product: Product }) {
   const { name, price, description, image } = product;
@@ -10,7 +10,7 @@ export default function ProductModal({ product }: { product: Product }) {
       <p className="text-gray-600">{description ?? 'No description yet'}</p>
       <div className="flex items-center justify-between">
         <span className="text-xl font-semibold">${price}</span>
-        <Button>Add to cart</Button>
+        <AddToCartButton productId={product.id} />
       </div>
     </div>
   );

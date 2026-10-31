@@ -1,7 +1,7 @@
-import Button from '@/shared/ui/Button/Button';
 import type { Product } from './schemas';
 import { Link } from 'react-router';
 import { buttonStyles } from '@/shared/ui/Button/button-styles';
+import AddToCartButton from '../cart/AddToCartButton';
 
 type ProductCardProps = {
   product: Product;
@@ -15,8 +15,6 @@ const priceFormatter = new Intl.NumberFormat('en-US', {
 
 export default function ProductCard({ product, onPreview }: ProductCardProps) {
   const { name, price, description, image } = product;
-
-  const handleAddProduct = () => {};
 
   return (
     <article>
@@ -43,7 +41,7 @@ export default function ProductCard({ product, onPreview }: ProductCardProps) {
             <Link to={`/products/${product.id}`} className={buttonStyles('secondary')}>
               Learn more
             </Link>
-            <Button onClick={handleAddProduct}>Add to cart</Button>
+            <AddToCartButton productId={product.id} />
           </div>
         </div>
       </div>
