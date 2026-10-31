@@ -16,3 +16,15 @@ export async function getProducts(limit?: number): Promise<Product[]> {
 
   return productSchema.array().parse(data);
 }
+
+export async function getProductsByIds(ids: number[]): Promise<Product[]> {
+  if (ids.length === 0) return [];
+
+  const { data, error } = await supabase
+    .from('products')
+    .select('id, name, price, image, description')
+    .in('id', ids);
+
+  if (error) throw new Error(error.message);
+  return productSchema.array().parse(data);
+}

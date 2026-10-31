@@ -1,5 +1,5 @@
+import AddToCartButton from '@/features/cart/AddToCartButton';
 import useProducts from '@/features/products/useProducts';
-import Button from '@/shared/ui/Button/Button';
 import { buttonStyles } from '@/shared/ui/Button/button-styles';
 import { useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router';
@@ -27,10 +27,6 @@ export default function ProductDetailPage() {
   }
 
   const { name, price, image, description } = product;
-
-  const handleAddProduct = () => {
-    // TODO: добавить товар в корзину
-  };
 
   return (
     <main className="min-h-screen bg-gray-50">
@@ -123,7 +119,7 @@ export default function ProductDetailPage() {
               </div>
 
               <div className="mt-auto pt-10">
-                <Button onClick={handleAddProduct}>Add to cart</Button>
+                <AddToCartButton productId={product.id} />
 
                 <Link
                   to="/products"
