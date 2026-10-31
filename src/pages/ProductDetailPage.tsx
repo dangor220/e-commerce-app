@@ -35,7 +35,6 @@ export default function ProductDetailPage() {
   return (
     <main className="min-h-screen bg-gray-50">
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 lg:py-12">
-        {/* Breadcrumbs */}
         <nav className="mb-8 flex flex-wrap items-center gap-2 text-sm">
           <Link to="/" className="text-gray-500 transition hover:text-gray-900">
             Home
@@ -52,16 +51,14 @@ export default function ProductDetailPage() {
           <span className="truncate font-medium text-gray-900">{name}</span>
         </nav>
 
-        {/* Product card */}
         <section className="overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-sm">
           <div className="grid grid-cols-1 lg:grid-cols-2">
-            {/* Product image */}
-            <div className="flex min-h-80 items-center justify-center bg-gray-100 p-6 sm:p-10 lg:min-h-[560px]">
+            <div className="flex min-h-80 items-center justify-center bg-gray-100 p-6 sm:p-10 lg:min-h-140">
               {image ? (
                 <img
                   src={image}
                   alt={name}
-                  className="max-h-[520px] w-full rounded-xl object-contain transition duration-500 hover:scale-[1.03]"
+                  className="max-h-130 w-full rounded-xl object-contain transition duration-500 hover:scale-[1.03]"
                 />
               ) : (
                 <div className="flex aspect-square w-full max-w-md items-center justify-center rounded-2xl bg-gray-200">
@@ -70,7 +67,6 @@ export default function ProductDetailPage() {
               )}
             </div>
 
-            {/* Product information */}
             <div className="flex flex-col p-6 sm:p-10 lg:p-12">
               <div>
                 <span className="inline-flex rounded-full bg-indigo-50 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-indigo-700">
@@ -92,7 +88,6 @@ export default function ProductDetailPage() {
 
               <div className="my-8 h-px bg-gray-200" />
 
-              {/* Description */}
               <div>
                 <h2 className="text-lg font-semibold text-gray-900">About this product</h2>
 
@@ -101,7 +96,6 @@ export default function ProductDetailPage() {
                 </p>
               </div>
 
-              {/* Product benefits */}
               <div className="mt-8 space-y-4">
                 <div className="flex items-start gap-3">
                   <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-green-100 text-sm text-green-700">
@@ -128,7 +122,6 @@ export default function ProductDetailPage() {
                 </div>
               </div>
 
-              {/* Actions */}
               <div className="mt-auto pt-10">
                 <Button onClick={handleAddProduct}>Add to cart</Button>
 
